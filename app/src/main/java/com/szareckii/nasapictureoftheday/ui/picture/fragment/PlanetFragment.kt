@@ -142,11 +142,14 @@ class PlanetFragment: Fragment() {
     private fun renderDataMars(data: PictureOfTheMarsData) {
         when (data) {
             is PictureOfTheMarsData.Success -> {
+                Log.e("11111111111111111", "renderDataMars.Success")
+
                 val serverResponseData = data.serverResponseData
                 val url = serverResponseData.photos?.get(0)?.img_src
                 if (url.isNullOrEmpty()) {
                     toast("Link is empty")
                 } else {
+                    Log.e("11111111111111111", "renderDataMars url NoNullOrEmpty")
                     circularProgressbar_mars.visibility = View.GONE
                     image_earth_view.visibility = View.VISIBLE
 
