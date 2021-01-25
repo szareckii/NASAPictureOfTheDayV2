@@ -151,7 +151,7 @@ class PlanetFragment: Fragment() {
                 } else {
                     Log.e("11111111111111111", "renderDataMars url NoNullOrEmpty")
                     circularProgressbar_mars.visibility = View.GONE
-                    image_earth_view.visibility = View.VISIBLE
+                    image_mars_view.visibility = View.VISIBLE
 
                     image_mars_view.load(url) {
                         lifecycle(this@PlanetFragment)
