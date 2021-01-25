@@ -154,6 +154,7 @@ class PlanetFragment: Fragment() {
                     image_mars_view.visibility = View.VISIBLE
 
                     image_mars_view.load(url) {
+//                    crossfade(true)
                         lifecycle(this@PlanetFragment)
                         error(R.drawable.ic_load_error_vector)
                         placeholder(R.drawable.ic_no_photo_vector)
