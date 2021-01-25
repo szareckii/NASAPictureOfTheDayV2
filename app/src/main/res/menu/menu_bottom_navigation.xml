@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/bottom_view_earth"
+        android:icon="@drawable/ic_earth"
+        android:title="@string/picture_of_the_day" />
+
+    <item
+        android:id="@+id/bottom_view_planet"
+        android:icon="@drawable/ic_planets"
+        android:title="@string/planets" />
+
+    <item
+        android:id="@+id/bottom_view_settings"
+        android:icon="@drawable/ic_settings"
+        android:title="@string/settings" />
+
+</menu>
