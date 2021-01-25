@@ -22,7 +22,7 @@ import com.szareckii.nasapictureoftheday.ui.picture.viewmodel.mars.PictureOfTheM
 import com.szareckii.nasapictureoftheday.ui.picture.viewmodel.mars.PictureOfTheMarsViewModel
 import kotlinx.android.synthetic.main.bottom_sheet_layout.*
 import kotlinx.android.synthetic.main.fragment_earth.*
-import kotlinx.android.synthetic.main.fragment_mats.*
+import kotlinx.android.synthetic.main.fragment_mars.*
 import kotlinx.android.synthetic.main.fragment_pictureoftheday.*
 import kotlinx.android.synthetic.main.fragment_planet.*
 import java.io.*
