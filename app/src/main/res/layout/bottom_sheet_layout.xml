@@ -8,7 +8,9 @@
     style="@style/BottomSheet"
     app:behavior_hideable="false"
     app:behavior_peekHeight="@dimen/behavior_peekHeight"
-    app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
+    app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
+    android:clickable="true"
+    android:focusable="true">
 
     <View
         android:id="@+id/bottom_sheet_line"
@@ -25,7 +27,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_top_small"
-        style="@style/AppTheme.TitleView"
+        style="@style/TitleView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/bottom_sheet_line"

@@ -13,6 +13,6 @@ class MarsFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_mars, container, false)
+        return inflater.inflate(R.layout.fragment_mars_start, container, false)
     }
 }

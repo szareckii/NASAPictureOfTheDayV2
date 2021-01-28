@@ -7,13 +7,14 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
 
+        <item name="android:textSize">@dimen/text_size_small</item>
         <item name="textInputStyle">@style/AppTextField</item>
-
         <item name="shapeAppearanceSmallComponent">@style/AppShapeAppearance.SmallComponent</item>
-
     </style>
 
+<!--    Тема космоса-->
     <style name="AppThemeSpace" parent="Theme.MaterialComponents.NoActionBar">
+        <item name="textInputStyle">@style/AppTextField</item>
     </style>
 
 <!--    Стиль для BottomNavigation-->
@@ -37,9 +38,15 @@
     </style>
 
     <!--    Стиль для TitleView-->
-    <style name="AppTheme.TitleView">
+    <style name="TitleView" parent="AppTheme">
         <item name="color">@color/black</item>
+        <item name="android:textSize">20sp</item>
         <item name="android:textStyle">bold</item>
+    </style>
+
+    <!--    Стиль для TextViewBottomSheet-->
+    <style name="TextViewBottomSheet" parent="AppTheme">
+        <item name="android:textSize">10sp</item>
     </style>
 
     <!--    Стиль для PaddingStartEnd-->
@@ -50,11 +57,35 @@
 
     <style name="BottomSheet" parent="AppTheme">
         <item name="android:background">@color/colorPrimary</item>
+<!--        <item name="android:textSize">20sp</item>-->
     </style>
-
 
     <style name="BackgroundWhite" parent="AppTheme">
         <item name="android:background">@color/colorPrimary</item>
+    </style>
+
+    <style name="FontSizeSmall" parent="AppTheme">
+        <item name="android:textSize">@dimen/text_size_small</item>
+    </style>
+
+    <style name="FontSizeMedium" parent="AppTheme">
+        <item name="android:textSize">@dimen/text_size_med</item>
+    </style>
+
+    <style name="FontSizeLarge" parent="AppTheme">
+        <item name="android:textSize">@dimen/text_size_big</item>
+    </style>
+
+    <style name="FontSizeSmallSpace" parent="AppThemeSpace">
+        <item name="android:textSize">@dimen/text_size_small</item>
+    </style>
+
+    <style name="FontSizeMediumSpace" parent="AppThemeSpace">
+        <item name="android:textSize">@dimen/text_size_med</item>
+    </style>
+
+    <style name="FontSizeLargeSpace" parent="AppThemeSpace">
+        <item name="android:textSize">@dimen/text_size_big</item>
     </style>
 
 </resources>

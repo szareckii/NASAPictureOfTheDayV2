@@ -8,6 +8,8 @@ import com.szareckii.nasapictureoftheday.R
 import com.szareckii.nasapictureoftheday.ui.picture.fragment.PictureOfTheDayFragment
 import com.szareckii.nasapictureoftheday.ui.picture.fragment.PlanetFragment
 import com.szareckii.nasapictureoftheday.ui.picture.fragment.SettingsFragment
+import kotlinx.android.synthetic.main.bottom_sheet_layout.*
+import kotlinx.android.synthetic.main.fragment_pod_start.*
 import kotlinx.android.synthetic.main.main_activity.*
 
 class MainActivity : AppCompatActivity() {
@@ -25,7 +27,6 @@ class MainActivity : AppCompatActivity() {
                     .commitNow()
         }
         setBottomNavigation()
-
     }
 
     private fun setBottomNavigation() {
@@ -56,11 +57,28 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initTheme() {
+
         sharedPref = getPreferences(Context.MODE_PRIVATE) ?: return
 
         when(sharedPref.getInt(getString(R.string.theme), 1)) {
-            1 -> setTheme(R.style.AppTheme)
-            2 -> setTheme(R.style.AppThemeSpace)
+            1 -> initTextSize()
+            2 -> initTextSizeSpace()
+        }
+    }
+
+    private fun initTextSize() {
+        when(sharedPref.getString(getString(R.string.size_text), "big")) {
+            "small" -> setTheme(R.style.FontSizeSmall)
+            "med" -> setTheme(R.style.FontSizeMedium)
+            "big" -> setTheme(R.style.FontSizeLarge)
+        }
+    }
+
+    private fun initTextSizeSpace() {
+        when(sharedPref.getString(getString(R.string.size_text), "big")) {
+            "small" -> setTheme(R.style.FontSizeSmallSpace)
+            "med" -> setTheme(R.style.FontSizeMediumSpace)
+            "big" -> setTheme(R.style.FontSizeLargeSpace)
         }
     }
 }

@@ -20,11 +20,13 @@ import com.szareckii.nasapictureoftheday.ui.picture.viewmodel.epic.EPICPictureDa
 import com.szareckii.nasapictureoftheday.ui.picture.viewmodel.epic.EPICPictureViewModel
 import com.szareckii.nasapictureoftheday.ui.picture.viewmodel.mars.PictureOfTheMarsData
 import com.szareckii.nasapictureoftheday.ui.picture.viewmodel.mars.PictureOfTheMarsViewModel
+import kotlinx.android.synthetic.main.activity_api_custom_tab_earth.*
+import kotlinx.android.synthetic.main.activity_api_custom_tab_mars.*
 import kotlinx.android.synthetic.main.bottom_sheet_layout.*
-import kotlinx.android.synthetic.main.fragment_earth.*
-import kotlinx.android.synthetic.main.fragment_mars.*
-import kotlinx.android.synthetic.main.fragment_pictureoftheday.*
+import kotlinx.android.synthetic.main.fragment_earth_start.*
+import kotlinx.android.synthetic.main.fragment_mars_start.*
 import kotlinx.android.synthetic.main.fragment_planet.*
+import kotlinx.android.synthetic.main.fragment_pod_start.*
 import java.io.*
 
 
@@ -153,8 +155,9 @@ class PlanetFragment: Fragment() {
                     circularProgressbar_mars.visibility = View.GONE
                     image_mars_view.visibility = View.VISIBLE
 
+                    motion_layout_mars_alpha.transitionToEnd()
+
                     image_mars_view.load(url) {
-//                    crossfade(true)
                         lifecycle(this@PlanetFragment)
                         error(R.drawable.ic_load_error_vector)
                         placeholder(R.drawable.ic_no_photo_vector)
@@ -181,6 +184,9 @@ class PlanetFragment: Fragment() {
                 } else {
                     circularProgressbar_earth.visibility = View.GONE
                     image_earth_view.visibility = View.VISIBLE
+
+                    motion_layout_earth_alpha.transitionToEnd()
+
                     image_earth_view.load(serverResponseData) {
                         lifecycle(this@PlanetFragment)
                         error(R.drawable.ic_load_error_vector)

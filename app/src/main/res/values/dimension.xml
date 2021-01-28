@@ -3,6 +3,9 @@
     <dimen name="margin_small">8dp</dimen>
     <dimen name="behavior_peekHeight">150dp</dimen>
     <dimen name="margin_top_small">5dp</dimen>
+    <dimen name="margin_top_med">10dp</dimen>
+    <dimen name="text_size_small">12sp</dimen>
+    <dimen name="text_size_med">16sp</dimen>
     <dimen name="text_size_big">20sp</dimen>
     <dimen name="padding">10dp</dimen>
     <dimen name="paddingStart">10dp</dimen>

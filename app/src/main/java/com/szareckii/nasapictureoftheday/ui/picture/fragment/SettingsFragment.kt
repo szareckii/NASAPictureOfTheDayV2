@@ -9,7 +9,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.google.android.material.chip.Chip
 import com.szareckii.nasapictureoftheday.R
-import kotlinx.android.synthetic.main.fragment_settings.*
+import kotlinx.android.synthetic.main.fragment_settings_new.*
 
 class SettingsFragment: Fragment() {
 
@@ -17,7 +17,7 @@ class SettingsFragment: Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_settings, container, false)
+        return inflater.inflate(R.layout.fragment_settings_new, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -25,14 +25,38 @@ class SettingsFragment: Fragment() {
 
         val sharedPref = activity?.getPreferences(Context.MODE_PRIVATE) ?: return
 
-        chipGroup.setOnCheckedChangeListener { chipGroup, position ->
-            chipGroup.findViewById<Chip>(position)?.let {
-                saveSharedPref(sharedPref, it.text.toString())
-            }
+        chipGroupListener(sharedPref)
+
+        button_small_size_text.setOnClickListener (clickListener(sharedPref))
+        button_med_size_text.setOnClickListener (clickListener(sharedPref))
+        button_big_size_text.setOnClickListener (clickListener(sharedPref))
+    }
+
+    private fun clickListener(sharedPref: SharedPreferences) = View.OnClickListener {view ->
+        when (view) {
+            button_small_size_text -> saveBtnSharedPref(sharedPref, "small")
+            button_med_size_text -> saveBtnSharedPref(sharedPref, "med")
+            button_big_size_text -> saveBtnSharedPref(sharedPref, "big")
         }
     }
 
-    private fun saveSharedPref(sharedPref: SharedPreferences, text: String) {
+    private fun saveBtnSharedPref(sharedPref: SharedPreferences, text: String) {
+        with (sharedPref.edit()) {
+            putString(getString(R.string.size_text), text)
+            apply()
+        }
+        activity?.recreate()
+    }
+
+    private fun chipGroupListener(sharedPref: SharedPreferences) {
+    chipGroup.setOnCheckedChangeListener { chipGroup, position ->
+        chipGroup.findViewById<Chip>(position)?.let {
+            saveThemeSharedPref(sharedPref, it.text.toString())
+            }
+        }
+     }
+
+    private fun saveThemeSharedPref(sharedPref: SharedPreferences, text: String) {
         if (text == getString(R.string.theme_day)) {
                 with (sharedPref.edit()) {
                     putInt(getString(R.string.theme), 1)
