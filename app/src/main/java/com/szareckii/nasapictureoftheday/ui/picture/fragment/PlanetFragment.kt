@@ -1,5 +1,8 @@
 package com.szareckii.nasapictureoftheday.ui.picture.fragment
 
+import android.animation.Animator
+import android.animation.AnimatorListenerAdapter
+import android.animation.ObjectAnimator
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
@@ -7,12 +10,17 @@ import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
-import androidx.viewpager.widget.ViewPager
+import androidx.transition.ChangeBounds
+import androidx.transition.ChangeImageTransform
+import androidx.transition.TransitionManager
+import androidx.transition.TransitionSet
+import androidx.viewpager.widget.ViewPager.OnPageChangeListener
 import coil.api.load
 import com.szareckii.nasapictureoftheday.R
 import com.szareckii.nasapictureoftheday.ui.picture.ViewPagerAdapter
@@ -23,14 +31,31 @@ import com.szareckii.nasapictureoftheday.ui.picture.viewmodel.mars.PictureOfTheM
 import kotlinx.android.synthetic.main.activity_api_custom_tab_earth.*
 import kotlinx.android.synthetic.main.activity_api_custom_tab_mars.*
 import kotlinx.android.synthetic.main.bottom_sheet_layout.*
+import kotlinx.android.synthetic.main.fragment_earth_end.*
 import kotlinx.android.synthetic.main.fragment_earth_start.*
+import kotlinx.android.synthetic.main.fragment_earth_start.circularProgressbar_earth
+import kotlinx.android.synthetic.main.fragment_earth_start.fab_earth
+import kotlinx.android.synthetic.main.fragment_earth_start.image_earth_view
+import kotlinx.android.synthetic.main.fragment_earth_start.motion_layout_earth_alpha
+import kotlinx.android.synthetic.main.fragment_earth_start.earth_option_one_container
+import kotlinx.android.synthetic.main.fragment_mars_end.*
 import kotlinx.android.synthetic.main.fragment_mars_start.*
+import kotlinx.android.synthetic.main.fragment_mars_start.circularProgressbar_mars
+import kotlinx.android.synthetic.main.fragment_mars_start.fab_mars
+import kotlinx.android.synthetic.main.fragment_mars_start.image_mars_view
+import kotlinx.android.synthetic.main.fragment_mars_start.motion_layout_mars_alpha
+import kotlinx.android.synthetic.main.fragment_mars_start.mars_option_one_container
 import kotlinx.android.synthetic.main.fragment_planet.*
 import kotlinx.android.synthetic.main.fragment_pod_start.*
 import java.io.*
 
 
 class PlanetFragment: Fragment() {
+
+    private var isExpandedMars = false
+    private var isExpandedEarth = false
+    private var isExpandedMarsInfo = false
+    private var isExpandedEarthInfo = false
 
     companion object {
         private const val EARTH = 0
@@ -47,8 +72,8 @@ class PlanetFragment: Fragment() {
     }
 
     override fun onCreateView(
-            inflater: LayoutInflater, container: ViewGroup?,
-            savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View? {
         return inflater.inflate(R.layout.fragment_planet, container, false)
     }
@@ -62,7 +87,7 @@ class PlanetFragment: Fragment() {
         viewModelEPIC.getData()
             .observe(viewLifecycleOwner, { renderDataEPIC(it) })
 
-        view_pager.adapter = ViewPagerAdapter(childFragmentManager)
+        view_pager.adapter = context?.let { ViewPagerAdapter(childFragmentManager, it) }
 
         tab_layout.setupWithViewPager(view_pager)
         tab_layout.getTabAt(0)?.setIcon(R.drawable.ic_earth)
@@ -70,19 +95,18 @@ class PlanetFragment: Fragment() {
 
         setCustomTabs()
         setHighlightedTab(EARTH)
+        viewPagerPageChangeListener()
+    }
 
-        view_pager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
+    private fun viewPagerPageChangeListener() {
+        view_pager.addOnPageChangeListener(object : OnPageChangeListener {
 
             override fun onPageSelected(position: Int) {
                 setHighlightedTab(position)
             }
 
             override fun onPageScrollStateChanged(state: Int) {}
-            override fun onPageScrolled(
-                    position: Int,
-                    positionOffset: Float,
-                    positionOffsetPixels: Int
-            ) {
+            override fun onPageScrolled(position: Int, positionOffset: Float,positionOffsetPixels: Int) {
             }
         })
     }
@@ -112,7 +136,7 @@ class PlanetFragment: Fragment() {
             layoutInflater.inflate(R.layout.activity_api_custom_tab_earth, null)
         earth.findViewById<AppCompatTextView>(R.id.tab_image_textview)
             .setTextColor(
-                    ContextCompat.getColor(requireActivity(), R.color.colorAccent)
+                ContextCompat.getColor(requireActivity(), R.color.colorAccent)
             )
         tab_layout.getTabAt(EARTH)?.customView = earth
         tab_layout.getTabAt(MARS)?.customView =
@@ -125,7 +149,7 @@ class PlanetFragment: Fragment() {
             layoutInflater.inflate(R.layout.activity_api_custom_tab_mars, null)
         mars.findViewById<AppCompatTextView>(R.id.tab_image_textview)
             .setTextColor(
-                    ContextCompat.getColor(requireActivity(), R.color.colorAccent)
+                ContextCompat.getColor(requireActivity(), R.color.colorAccent)
             )
         tab_layout.getTabAt(EARTH)?.customView =
             layoutInflater.inflate(R.layout.activity_api_custom_tab_earth, null)
@@ -147,11 +171,11 @@ class PlanetFragment: Fragment() {
                 Log.e("11111111111111111", "renderDataMars.Success")
 
                 val serverResponseData = data.serverResponseData
-                val url = serverResponseData.photos?.get(0)?.img_src
+                val url = serverResponseData.photos?.get(0)?.imgSrc
                 if (url.isNullOrEmpty()) {
                     toast("Link is empty")
                 } else {
-                    Log.e("11111111111111111", "renderDataMars url NoNullOrEmpty")
+                    Log.e("11111111111111111", "renderDataMars url NotNullOrEmpty")
                     circularProgressbar_mars.visibility = View.GONE
                     image_mars_view.visibility = View.VISIBLE
 
@@ -162,6 +186,13 @@ class PlanetFragment: Fragment() {
                         error(R.drawable.ic_load_error_vector)
                         placeholder(R.drawable.ic_no_photo_vector)
                     }
+
+                    val aboutPhoto = serverResponseData.photos[0].earthDate + " " +
+                            serverResponseData.photos[0].rover?.name + " " +
+                            serverResponseData.photos[0].rover?.status
+                    imageMarsClick()
+                    isExpandedMarsInfo = false
+                    setFABMars(aboutPhoto)
                 }
             }
             is PictureOfTheMarsData.Loading -> {
@@ -170,6 +201,159 @@ class PlanetFragment: Fragment() {
             is PictureOfTheMarsData.Error -> {
                 toast(data.error.message)
             }
+        }
+    }
+
+    private fun setFABMars(aboutPhoto: String) {
+        setInitialStateMars()
+
+        fab_mars.setOnClickListener {
+            if (isExpandedMarsInfo) {
+                collapseFabMars()
+            } else {
+                expandFABMars(aboutPhoto)
+            }
+        }
+    }
+
+    private fun setInitialStateMars() {
+        image_mars_view.apply {
+            alpha = 1f
+        }
+        mars_option_one_container.apply {
+            alpha = 0f
+            isClickable = false
+        }
+    }
+
+    private fun expandFABMars(aboutPhoto: String) {
+            isExpandedMarsInfo = true
+            ObjectAnimator.ofFloat(mars_option_one_container, "translationY", -100f).start()
+            mars_option_one_container.animate()
+                .alpha(1f)
+                .setDuration(300)
+                .setListener(object : AnimatorListenerAdapter() {
+                    override fun onAnimationEnd(animation: Animator) {
+                        mars_option_one_container.isClickable = true
+                        mars_option_one_container.setOnClickListener {
+                            toast(aboutPhoto)
+                        }
+                    }
+                })
+        image_mars_view.animate()
+            .alpha(0.5f)
+            .setDuration(300)
+            .setListener(object : AnimatorListenerAdapter() {
+                override fun onAnimationEnd(animation: Animator) {
+                    image_mars_view.isClickable = false
+                }
+            })
+    }
+
+    private fun collapseFabMars() {
+        isExpandedMarsInfo = false
+        ObjectAnimator.ofFloat(mars_option_one_container, "translationY", 0f).start()
+        mars_option_one_container.animate()
+            .alpha(0f)
+            .setDuration(300)
+            .setListener(object : AnimatorListenerAdapter() {
+                override fun onAnimationEnd(animation: Animator) {
+                    mars_option_one_container.isClickable = false
+                }
+            })
+      image_mars_view.animate()
+            .alpha(1.0f)
+            .setDuration(300)
+            .setListener(object : AnimatorListenerAdapter() {
+                override fun onAnimationEnd(animation: Animator) {
+                    image_mars_view.isClickable = true
+                }
+            })
+    }
+
+
+    private fun setFABEarth(aboutPhoto: String) {
+        setInitialStateEarth()
+
+        fab_earth.setOnClickListener {
+            if (isExpandedEarthInfo) {
+                collapseFabEarth()
+            } else {
+                expandFABEarth(aboutPhoto)
+            }
+        }
+    }
+
+    private fun setInitialStateEarth() {
+        image_earth_view.apply {
+            alpha = 1f
+        }
+        earth_option_one_container.apply {
+            alpha = 0f
+            isClickable = false
+        }
+    }
+
+    private fun expandFABEarth(aboutPhoto: String) {
+            isExpandedEarthInfo = true
+            ObjectAnimator.ofFloat(earth_option_one_container, "translationY", -100f).start()
+            earth_option_one_container.animate()
+                .alpha(1f)
+                .setDuration(300)
+                .setListener(object : AnimatorListenerAdapter() {
+                    override fun onAnimationEnd(animation: Animator) {
+                        earth_option_one_container.isClickable = true
+                        earth_option_one_container.setOnClickListener {
+                            toast(aboutPhoto)
+                        }
+                    }
+                })
+        image_earth_view.animate()
+            .alpha(0.5f)
+            .setDuration(300)
+            .setListener(object : AnimatorListenerAdapter() {
+                override fun onAnimationEnd(animation: Animator) {
+                    image_earth_view.isClickable = false
+                }
+            })
+    }
+
+    private fun collapseFabEarth() {
+        isExpandedEarthInfo = false
+        ObjectAnimator.ofFloat(earth_option_one_container, "translationY", 0f).start()
+        earth_option_one_container.animate()
+            .alpha(0f)
+            .setDuration(300)
+            .setListener(object : AnimatorListenerAdapter() {
+                override fun onAnimationEnd(animation: Animator) {
+                    earth_option_one_container.isClickable = false
+                }
+            })
+      image_earth_view.animate()
+            .alpha(1.0f)
+            .setDuration(300)
+            .setListener(object : AnimatorListenerAdapter() {
+                override fun onAnimationEnd(animation: Animator) {
+                    image_earth_view.isClickable = true
+                }
+            })
+    }
+
+    private fun imageMarsClick() {
+        image_mars_view.setOnClickListener {
+            isExpandedMars = !isExpandedMars
+            TransitionManager.beginDelayedTransition(
+                motion_layout_mars_alpha, TransitionSet()
+                    .addTransition(ChangeBounds())
+                    .addTransition(ChangeImageTransform())
+            )
+
+            val params: ViewGroup.LayoutParams = image_mars_view.layoutParams
+            params.height =
+                if (isExpandedMars) ViewGroup.LayoutParams.MATCH_PARENT else ViewGroup.LayoutParams.WRAP_CONTENT
+            image_mars_view.layoutParams = params
+            image_mars_view.scaleType =
+                if (isExpandedMars) ImageView.ScaleType.CENTER_CROP else ImageView.ScaleType.FIT_CENTER
         }
     }
 
@@ -192,6 +376,12 @@ class PlanetFragment: Fragment() {
                         error(R.drawable.ic_load_error_vector)
                         placeholder(R.drawable.ic_no_photo_vector)
                     }
+
+                    val aboutPhoto = "Earth 2019-05-30"
+                    imageEarthClick()
+                    isExpandedEarthInfo = false
+                    setFABEarth(aboutPhoto)
+
                 }
             }
             is EPICPictureData.Loading -> {
@@ -200,6 +390,24 @@ class PlanetFragment: Fragment() {
             is EPICPictureData.Error -> {
                 toast(data.error.message)
             }
+        }
+    }
+
+    private fun imageEarthClick() {
+        image_earth_view.setOnClickListener {
+            isExpandedEarth = !isExpandedEarth
+            TransitionManager.beginDelayedTransition(
+                motion_layout_earth_alpha, TransitionSet()
+                    .addTransition(ChangeBounds())
+                    .addTransition(ChangeImageTransform())
+            )
+
+            val params: ViewGroup.LayoutParams = image_earth_view.layoutParams
+            params.height =
+                if (isExpandedEarth) ViewGroup.LayoutParams.MATCH_PARENT else ViewGroup.LayoutParams.WRAP_CONTENT
+            image_earth_view.layoutParams = params
+            image_earth_view.scaleType =
+                if (isExpandedEarth) ImageView.ScaleType.CENTER_CROP else ImageView.ScaleType.FIT_CENTER
         }
     }
 

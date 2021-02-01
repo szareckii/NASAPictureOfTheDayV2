@@ -9,7 +9,7 @@
 
         <item name="android:textSize">@dimen/text_size_small</item>
         <item name="textInputStyle">@style/AppTextField</item>
-        <item name="shapeAppearanceSmallComponent">@style/AppShapeAppearance.SmallComponent</item>
+<!--        <item name="shapeAppearanceSmallComponent">@style/AppShapeAppearance.SmallComponent</item>-->
     </style>
 
 <!--    Тема космоса-->

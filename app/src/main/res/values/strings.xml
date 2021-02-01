@@ -22,4 +22,5 @@
     <string name="aa" translatable="false">aA</string>
     <string name="chose_size_text">Chose size text</string>
     <string name="size_text" translatable="false">size_text</string>
+    <string name="about_photo">About photo</string>
 </resources>

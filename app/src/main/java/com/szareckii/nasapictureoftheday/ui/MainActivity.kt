@@ -8,6 +8,7 @@ import com.szareckii.nasapictureoftheday.R
 import com.szareckii.nasapictureoftheday.ui.picture.fragment.PictureOfTheDayFragment
 import com.szareckii.nasapictureoftheday.ui.picture.fragment.PlanetFragment
 import com.szareckii.nasapictureoftheday.ui.picture.fragment.SettingsFragment
+import com.szareckii.nasapictureoftheday.ui.picture.fragment.TestFragment
 import kotlinx.android.synthetic.main.bottom_sheet_layout.*
 import kotlinx.android.synthetic.main.fragment_pod_start.*
 import kotlinx.android.synthetic.main.main_activity.*
@@ -43,6 +44,12 @@ class MainActivity : AppCompatActivity() {
                     supportFragmentManager.beginTransaction()
                         .replace(R.id.activity_api_bottom_container, PlanetFragment())
                         .commitNow()
+                    true
+                }
+                R.id.bottom_view_test -> {
+                    supportFragmentManager.beginTransaction()
+                            .replace(R.id.activity_api_bottom_container, TestFragment())
+                            .commitNow()
                     true
                 }
                 R.id.bottom_view_settings -> {

@@ -17,6 +17,7 @@ import com.szareckii.nasapictureoftheday.R
 import com.szareckii.nasapictureoftheday.ui.picture.viewmodel.day.PictureOfTheDayData
 import com.szareckii.nasapictureoftheday.ui.picture.viewmodel.day.PictureOfTheDayViewModel
 import kotlinx.android.synthetic.main.bottom_sheet_layout.*
+import kotlinx.android.synthetic.main.fragment_earth_start.*
 import kotlinx.android.synthetic.main.fragment_pod_start.*
 
 class PictureOfTheDayFragment : Fragment() {
@@ -25,7 +26,6 @@ class PictureOfTheDayFragment : Fragment() {
 
     companion object {
         fun newInstance() = PictureOfTheDayFragment()
-        private var isMain = true
     }
 
     private lateinit var bottomSheetBehavior: BottomSheetBehavior<ConstraintLayout>
@@ -46,7 +46,6 @@ class PictureOfTheDayFragment : Fragment() {
             savedInstanceState: Bundle?
     ): View {
         return inflater.inflate(R.layout.fragment_pod_start, container, false)
-//        return inflater.inflate(R.layout.fragment_pictureoftheday, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -84,14 +83,7 @@ class PictureOfTheDayFragment : Fragment() {
                     }
 
                     if (serverResponseData.mediaType == "video") {
-                        image_pod_view.visibility = View.GONE
-                        circularProgressbar_POD.visibility = View.GONE
-                        webView.visibility = View.VISIBLE
-                        webView.clearCache(true)
-                        webView.clearHistory()
-                        webView.settings.javaScriptEnabled = true
-                        webView.settings.javaScriptCanOpenWindowsAutomatically = true
-                        webView.loadUrl(url)
+                        playVideoType(url)
                     } else {
                         circularProgressbar_POD.visibility = View.GONE
                         webView.visibility = View.GONE
@@ -110,6 +102,20 @@ class PictureOfTheDayFragment : Fragment() {
             is PictureOfTheDayData.Error -> {
                 toast(data.error.message)
             }
+        }
+    }
+
+    @SuppressLint("SetJavaScriptEnabled")
+    private fun playVideoType(url: String?) {
+        image_pod_view.visibility = View.GONE
+        circularProgressbar_POD.visibility = View.GONE
+        webView.visibility = View.VISIBLE
+        webView.clearCache(true)
+        webView.clearHistory()
+        webView.settings.javaScriptEnabled = true
+        webView.settings.javaScriptCanOpenWindowsAutomatically = true
+        if (url != null) {
+            webView.loadUrl(url)
         }
     }
 

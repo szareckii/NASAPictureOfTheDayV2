@@ -11,6 +11,11 @@
         android:title="@string/planets" />
 
     <item
+        android:id="@+id/bottom_view_test"
+        android:icon="@drawable/ic_system"
+        android:title="Test" />
+
+    <item
         android:id="@+id/bottom_view_settings"
         android:icon="@drawable/ic_settings"
         android:title="@string/settings" />
