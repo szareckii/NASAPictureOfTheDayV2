@@ -23,4 +23,16 @@
     <string name="chose_size_text">Chose size text</string>
     <string name="size_text" translatable="false">size_text</string>
     <string name="about_photo">About photo</string>
+    <string name="notes">Notes</string>
+    <string name="header">Notes</string>
+    <string name="label_simple_dialog">label_simple_dialog</string>
+    <string name="label_ok">Ok</string>
+    <string name="label_cancel">Cancel</string>
+    <string name="msg_enter_details">New note</string>
+    <string name="label_submit">OK</string>
+    <string name="error_null_text">Empty title</string>
+    <string name="label_logout" translatable="false">label_logout</string>
+    <string name="msg_logout" translatable="false">msg_logout</string>
+    <string name="note_title">Note title</string>
+    <string name="note_text">Note text</string>
 </resources>

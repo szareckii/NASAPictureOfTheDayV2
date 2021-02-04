@@ -1,4 +1,4 @@
-package com.szareckii.nasapictureoftheday.ui.picture.viewmodel.day
+package com.szareckii.nasapictureoftheday.ui.picture.viewModel.day
 
 import com.szareckii.nasapictureoftheday.ui.picture.model.PODServerResponseData
 

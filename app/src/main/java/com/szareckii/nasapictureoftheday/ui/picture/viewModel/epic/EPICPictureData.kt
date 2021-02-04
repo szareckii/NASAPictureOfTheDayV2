@@ -1,4 +1,4 @@
-package com.szareckii.nasapictureoftheday.ui.picture.viewmodel.epic
+package com.szareckii.nasapictureoftheday.ui.picture.viewModel.epic
 
 import android.graphics.Bitmap
 

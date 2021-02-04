@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="margin_small">8dp</dimen>
-    <dimen name="behavior_peekHeight">150dp</dimen>
+    <dimen name="behavior_peekHeight">120dp</dimen>
     <dimen name="margin_top_small">5dp</dimen>
     <dimen name="margin_top_med">10dp</dimen>
     <dimen name="text_size_small">12sp</dimen>
@@ -13,4 +13,5 @@
     <dimen name="drawablePadding">10dp</dimen>
     <dimen name="layout_marginViewPagerPoint">7dp</dimen>
     <dimen name="layout_marginViewPagerPoints">7dp</dimen>
+    <dimen name="border_height">1dp</dimen>
 </resources>

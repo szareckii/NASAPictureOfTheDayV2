@@ -16,4 +16,14 @@
     <string name="mars">Марс</string>
     <string name="chose_size_text">Выбрать размер тектса</string>
     <string name="about_photo">О фотографии</string>
+    <string name="notes">Заметки</string>
+    <string name="header">Заметки</string>
+    <string name="label_simple_dialog">label_simple_dialog</string>
+    <string name="label_ok">Да</string>
+    <string name="label_cancel">Отмена</string>
+    <string name="msg_enter_details">Новая заметка</string>
+    <string name="label_submit">Ок</string>
+    <string name="error_null_text">Пустая заметка</string>
+    <string name="note_title">Заголовок заметки</string>
+    <string name="note_text">Текст заметки</string>
 </resources>

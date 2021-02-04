@@ -26,6 +26,7 @@
         android:id="@+id/bottom_sheet_description_header"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:padding="@dimen/padding"
         android:layout_marginTop="@dimen/margin_top_small"
         style="@style/TitleView"
         app:layout_constraintEnd_toEndOf="parent"

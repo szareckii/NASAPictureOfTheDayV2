@@ -1,57 +1,60 @@
-package com.szareckii.nasapictureoftheday.ui.picture.viewmodel.day
+package com.szareckii.nasapictureoftheday.ui.picture.viewModel.mars
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.szareckii.nasapictureoftheday.BuildConfig
+import com.szareckii.nasapictureoftheday.ui.picture.model.MarsServerResponsePhoto
 import com.szareckii.nasapictureoftheday.ui.picture.model.PicturesRetrofitImpl
-import com.szareckii.nasapictureoftheday.ui.picture.model.PODServerResponseData
+import com.szareckii.nasapictureoftheday.ui.picture.viewModel.day.PictureOfTheDayData
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class PictureOfTheDayViewModel(
-    private val liveDataForViewToObserve: MutableLiveData<PictureOfTheDayData> = MutableLiveData(),
+class PictureOfTheMarsViewModel(
+    private val liveDataForViewToObserve: MutableLiveData<PictureOfTheMarsData> = MutableLiveData(),
     private val retrofitImpl: PicturesRetrofitImpl = PicturesRetrofitImpl()
 ) :
     ViewModel() {
 
-    fun getData(): LiveData<PictureOfTheDayData> {
+    fun getData(): LiveData<PictureOfTheMarsData> {
         sendServerRequest()
         return liveDataForViewToObserve
     }
 
     private fun sendServerRequest() {
-        liveDataForViewToObserve.value = PictureOfTheDayData.Loading(null)
+        liveDataForViewToObserve.value = PictureOfTheMarsData.Loading(null)
         val apiKey: String = BuildConfig.NASA_API_KEY
         if (apiKey.isBlank()) {
             PictureOfTheDayData.Error(Throwable("You need API key"))
         } else {
-            retrofitImpl.getRetrofitImpl().getPictureOfTheDay(apiKey).enqueue(object :
-                Callback<PODServerResponseData> {
+            retrofitImpl.getRetrofitImpl().getPictureOfTheMars(apiKey).enqueue(object :
+                Callback<MarsServerResponsePhoto> {
                 override fun onResponse(
-                    call: Call<PODServerResponseData>,
-                    response: Response<PODServerResponseData>
+                    call: Call<MarsServerResponsePhoto>,
+                    response: Response<MarsServerResponsePhoto>
                 ) {
                     if (response.isSuccessful && response.body() != null) {
                         liveDataForViewToObserve.value =
-                            PictureOfTheDayData.Success(response.body()!!)
+                            PictureOfTheMarsData.Success(response.body()!!)
                     } else {
                         val message = response.message()
                         if (message.isNullOrEmpty()) {
                             liveDataForViewToObserve.value =
-                                PictureOfTheDayData.Error(Throwable("Unidentified error"))
+                                PictureOfTheMarsData.Error(Throwable("Unidentified error"))
                         } else {
                             liveDataForViewToObserve.value =
-                                PictureOfTheDayData.Error(Throwable(message))
+                                PictureOfTheMarsData.Error(Throwable(message))
                         }
                     }
                 }
 
-                override fun onFailure(call: Call<PODServerResponseData>, t: Throwable) {
-                    liveDataForViewToObserve.value = PictureOfTheDayData.Error(t)
+                override fun onFailure(call: Call<MarsServerResponsePhoto>, t: Throwable) {
+                    liveDataForViewToObserve.value = PictureOfTheMarsData.Error(t)
                 }
             })
         }
     }
+
+
 }

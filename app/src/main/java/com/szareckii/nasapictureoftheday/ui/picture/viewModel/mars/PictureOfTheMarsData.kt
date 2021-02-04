@@ -1,4 +1,4 @@
-package com.szareckii.nasapictureoftheday.ui.picture.viewmodel.mars
+package com.szareckii.nasapictureoftheday.ui.picture.viewModel.mars
 
 import com.szareckii.nasapictureoftheday.ui.picture.model.MarsServerResponsePhoto
 
