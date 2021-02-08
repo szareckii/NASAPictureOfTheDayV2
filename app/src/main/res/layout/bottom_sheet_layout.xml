@@ -22,13 +22,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+
     <TextView
         android:id="@+id/bottom_sheet_description_header"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="@dimen/padding"
         android:layout_marginTop="@dimen/margin_top_small"
+        android:fontFamily="@font/stalinist_one"
         style="@style/TitleView"
+        android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/bottom_sheet_line"
@@ -38,9 +41,11 @@
         android:id="@+id/bottom_sheet_description"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/stalinist_one"
         android:padding="@dimen/padding"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/bottom_sheet_description_header"
         tools:text="This lovely starfield spans some four full moons." />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
