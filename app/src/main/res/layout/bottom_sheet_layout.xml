@@ -22,7 +22,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-
     <TextView
         android:id="@+id/bottom_sheet_description_header"
         android:layout_width="wrap_content"
@@ -30,7 +29,7 @@
         android:padding="@dimen/padding"
         android:layout_marginTop="@dimen/margin_top_small"
         android:fontFamily="@font/stalinist_one"
-        style="@style/TitleView"
+        android:textStyle="bold"
         android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

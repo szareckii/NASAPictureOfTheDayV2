@@ -57,6 +57,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:indeterminate="false"
+                app:visibilityMode="ignore"
                 android:max="100"
                 android:progress="50"
                 android:secondaryProgress="100"
@@ -70,22 +71,37 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:visibility="visible"
+                app:visibilityMode="ignore"
                 android:contentDescription="@string/photo_of_the_day_stub"
-                app:layout_constraintBottom_toBottomOf="parent"
+
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/pod_barrier"
                 app:srcCompat="@drawable/ic_no_photo_vector" />
 
-            <WebView
-                android:id="@+id/webView"
+            <com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
+                android:id="@+id/third_party_player_view"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                app:layout_constraintBottom_toBottomOf="parent"
+                app:autoPlay="false"
+                android:visibility="gone"
+                app:showFullScreenButton="false"
+                app:visibilityMode="ignore"
+
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toBottomOf="@+id/pod_barrier" />
+
+
+
+            <androidx.constraintlayout.widget.Barrier
+                android:id="@+id/pod_barrier"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:barrierDirection="bottom"
+                app:constraint_referenced_ids="input_layout" />
+
 
         </androidx.constraintlayout.motion.widget.MotionLayout>
     </androidx.core.widget.NestedScrollView>
