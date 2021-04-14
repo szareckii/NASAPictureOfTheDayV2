@@ -38,9 +38,9 @@
 
     <!--    Стиль для TitleView-->
     <style name="TitleView" parent="AppTheme">
-        <item name="color">@color/black</item>
+<!--        <item name="color">@color/black</item>-->
         <item name="android:textSize">20sp</item>
-        <item name="android:textStyle">bold</item>
+<!--        <item name="android:textStyle">bold</item>-->
     </style>
 
     <!--    Стиль для TextViewBottomSheet-->
