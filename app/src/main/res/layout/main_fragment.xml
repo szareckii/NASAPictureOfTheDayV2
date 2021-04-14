@@ -48,7 +48,7 @@ android:layout_height="match_parent">
                 app:srcCompat="@drawable/ic_no_photo_vector" />
 
             <WebView
-                android:id="@+id/webView"
+                android:id="@+id/video_pod_webView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:layout_constraintBottom_toBottomOf="parent"

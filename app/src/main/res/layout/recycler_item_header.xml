@@ -11,8 +11,8 @@
         android:layout_height="wrap_content"
         android:padding="15dp"
         android:text="@string/header"
-        android:textColor="@color/design_default_color_error"
-        android:textSize="35sp"
+        android:textColor="@color/text_title_black"
+        android:textSize="@dimen/item_note_text_size"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
