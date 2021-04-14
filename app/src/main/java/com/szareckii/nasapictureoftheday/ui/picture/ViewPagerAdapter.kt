@@ -1,13 +1,17 @@
 package com.szareckii.nasapictureoftheday.ui.picture
 
+import android.content.Context
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
+import com.szareckii.nasapictureoftheday.R
 import com.szareckii.nasapictureoftheday.ui.picture.fragment.EarthFragment
 import com.szareckii.nasapictureoftheday.ui.picture.fragment.MarsFragment
 
-class ViewPagerAdapter(fragmentManager: FragmentManager) :
+class ViewPagerAdapter(fragmentManager: FragmentManager, context: Context) :
     FragmentPagerAdapter(fragmentManager) {
+
+    private val contextApp = context
 
     companion object {
         private const val EARTH_FRAGMENT = 0
@@ -29,10 +33,11 @@ class ViewPagerAdapter(fragmentManager: FragmentManager) :
     }
 
     override fun getPageTitle(position: Int): CharSequence? {
+
         return when (position) {
-            0 -> "Earth"
-            1 -> "Mars"
-            else -> "Earth"
+            0 -> contextApp.getString(R.string.earth)
+            1 -> contextApp.getString(R.string.mars)
+            else -> contextApp.getString(R.string.earth)
         }
     }
 }

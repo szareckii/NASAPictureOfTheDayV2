@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MotionScene xmlns:motion="http://schemas.android.com/apk/res-auto">
+    <Transition
+        motion:constraintSetEnd="@layout/fragment_earth_end"
+        motion:constraintSetStart="@layout/fragment_earth_start"
+        motion:duration="2000">
+    </Transition>
+</MotionScene>
