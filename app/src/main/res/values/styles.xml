@@ -1,0 +1,60 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+
+        <item name="textInputStyle">@style/AppTextField</item>
+
+        <item name="shapeAppearanceSmallComponent">@style/AppShapeAppearance.SmallComponent</item>
+
+    </style>
+
+    <style name="AppThemeSpace" parent="Theme.MaterialComponents.NoActionBar">
+    </style>
+
+<!--    Стиль для BottomNavigation-->
+    <style name="BottomNavigation">
+        <item name="android:background">@color/wisteria</item>
+        <item name="itemTextColor">@color/colorAccent</item>
+        <item name="android:layout_margin">@dimen/margin_small</item>
+    </style>
+
+<!--    Стиль для TextInputLayout-->
+    <style name="AppTextField" parent="Widget.MaterialComponents.TextInputLayout.FilledBox">
+        <item name="boxBackgroundColor">@color/text_field_background</item>
+        <item name="counterMaxLength">20</item>
+        <item name="android:padding">@dimen/padding</item>
+    </style>
+
+<!--    Стиль для SmallComponent-->
+    <style name="AppShapeAppearance.SmallComponent" parent="ShapeAppearance.MaterialComponents.SmallComponent">
+        <item name="cornerFamily">cut</item>
+        <item name="cornerSize">8dp</item>
+    </style>
+
+    <!--    Стиль для TitleView-->
+    <style name="AppTheme.TitleView">
+        <item name="color">@color/black</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <!--    Стиль для PaddingStartEnd-->
+    <style name="PaddingStartEnd" parent="AppTheme">
+        <item name="paddingStart">@dimen/paddingStart</item>
+        <item name="paddingEnd">@dimen/paddingEnd</item>
+    </style>
+
+    <style name="BottomSheet" parent="AppTheme">
+        <item name="android:background">@color/colorPrimary</item>
+    </style>
+
+
+    <style name="BackgroundWhite" parent="AppTheme">
+        <item name="android:background">@color/colorPrimary</item>
+    </style>
+
+</resources>
