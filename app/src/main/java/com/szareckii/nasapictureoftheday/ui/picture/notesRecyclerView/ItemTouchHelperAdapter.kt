@@ -1,0 +1,7 @@
+package com.szareckii.nasapictureoftheday.ui.picture.notesRecyclerView
+
+interface ItemTouchHelperAdapter {
+    fun onItemMove(fromPosition: Int, toPosition: Int)
+
+    fun onItemDismiss(position: Int)
+}

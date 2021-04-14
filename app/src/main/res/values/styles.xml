@@ -9,7 +9,6 @@
 
         <item name="android:textSize">@dimen/text_size_small</item>
         <item name="textInputStyle">@style/AppTextField</item>
-<!--        <item name="shapeAppearanceSmallComponent">@style/AppShapeAppearance.SmallComponent</item>-->
     </style>
 
 <!--    Тема космоса-->
@@ -24,7 +23,7 @@
         <item name="android:layout_margin">@dimen/margin_small</item>
     </style>
 
-<!--    Стиль для TextInputLayout-->
+    <!--    Стиль для TextInputLayout-->
     <style name="AppTextField" parent="Widget.MaterialComponents.TextInputLayout.FilledBox">
         <item name="boxBackgroundColor">@color/text_field_background</item>
         <item name="counterMaxLength">20</item>

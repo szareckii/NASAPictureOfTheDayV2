@@ -24,10 +24,10 @@ import androidx.viewpager.widget.ViewPager.OnPageChangeListener
 import coil.api.load
 import com.szareckii.nasapictureoftheday.R
 import com.szareckii.nasapictureoftheday.ui.picture.ViewPagerAdapter
-import com.szareckii.nasapictureoftheday.ui.picture.viewmodel.epic.EPICPictureData
-import com.szareckii.nasapictureoftheday.ui.picture.viewmodel.epic.EPICPictureViewModel
-import com.szareckii.nasapictureoftheday.ui.picture.viewmodel.mars.PictureOfTheMarsData
-import com.szareckii.nasapictureoftheday.ui.picture.viewmodel.mars.PictureOfTheMarsViewModel
+import com.szareckii.nasapictureoftheday.ui.picture.viewModel.epic.EPICPictureData
+import com.szareckii.nasapictureoftheday.ui.picture.viewModel.epic.EPICPictureViewModel
+import com.szareckii.nasapictureoftheday.ui.picture.viewModel.mars.PictureOfTheMarsData
+import com.szareckii.nasapictureoftheday.ui.picture.viewModel.mars.PictureOfTheMarsViewModel
 import kotlinx.android.synthetic.main.activity_api_custom_tab_earth.*
 import kotlinx.android.synthetic.main.activity_api_custom_tab_mars.*
 import kotlinx.android.synthetic.main.bottom_sheet_layout.*

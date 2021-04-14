@@ -14,8 +14,8 @@ import androidx.lifecycle.ViewModelProviders
 import coil.api.load
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.szareckii.nasapictureoftheday.R
-import com.szareckii.nasapictureoftheday.ui.picture.viewmodel.day.PictureOfTheDayData
-import com.szareckii.nasapictureoftheday.ui.picture.viewmodel.day.PictureOfTheDayViewModel
+import com.szareckii.nasapictureoftheday.ui.picture.viewModel.day.PictureOfTheDayData
+import com.szareckii.nasapictureoftheday.ui.picture.viewModel.day.PictureOfTheDayViewModel
 import kotlinx.android.synthetic.main.bottom_sheet_layout.*
 import kotlinx.android.synthetic.main.fragment_earth_start.*
 import kotlinx.android.synthetic.main.fragment_pod_start.*
@@ -105,7 +105,7 @@ class PictureOfTheDayFragment : Fragment() {
     }
 
     @SuppressLint("SetJavaScriptEnabled")
-    private fun playVideoType(url: String?) {
+    private fun playVideoType(url: String) {
         image_pod_view.visibility = View.GONE
         circularProgressbar_POD.visibility = View.GONE
         webView.visibility = View.VISIBLE
@@ -113,9 +113,7 @@ class PictureOfTheDayFragment : Fragment() {
         webView.clearHistory()
         webView.settings.javaScriptEnabled = true
         webView.settings.javaScriptCanOpenWindowsAutomatically = true
-        if (url != null) {
-            webView.loadUrl(url)
-        }
+        webView.loadUrl(url)
     }
 
     fun setWikiButton() {
